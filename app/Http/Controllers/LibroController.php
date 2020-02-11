@@ -37,7 +37,7 @@ class LibroController extends Controller
     {
         $this->validate($request,['titulo'=>'required','autor'=>'required','paginas' =>'required','precio'=>'required']);
         Libro::create($request->all());
-        return redirect()->route('Libro.index')->with('success','Libro guardado correctamente');
+        return redirect()->route('Libro.index')->with('success','Libro guardado satisfactoriamente');
     }
 
     /**
@@ -74,7 +74,8 @@ class LibroController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,['titulo'=>'required','autor'=>'required','paginas'=>'required','precio'=>'required']);
-        Libro::find($id)->update();
+        Libro::find($id)->update($request->all());
+        return redirect()->route('Libro.index')->with('success','Libro actualizado satisfactoriamente');
     }
 
     /**
@@ -85,6 +86,7 @@ class LibroController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Libro::find($id)->delete();
+        return redirect()->route('Libro.index')->with('success','Libro eliminado satisfactoriamente');
     }
 }
