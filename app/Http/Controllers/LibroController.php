@@ -13,9 +13,10 @@ class LibroController extends Controller
      */
     public function index()
     {
-        //
+        $libros = Libros::orderBy('idLibro','DESC')->paginate(5);
+        return view('Libro.index',compact('libros'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -23,7 +24,7 @@ class LibroController extends Controller
      */
     public function create()
     {
-        //
+        return view('Libro.create');
     }
 
     /**
@@ -34,7 +35,9 @@ class LibroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,['titulo'=>'required','autor'=>'required','paginas' =>'required','precio'=>'required']);
+        Libro::create($request->all());
+        return redirect()->route('Libro.index')->with('success','Libro guardado correctamente');
     }
 
     /**
@@ -45,7 +48,8 @@ class LibroController extends Controller
      */
     public function show($id)
     {
-        //
+        $libros = Libro::find($id);
+        return view('Libro.show',compact('libros'));
     }
 
     /**
@@ -56,7 +60,8 @@ class LibroController extends Controller
      */
     public function edit($id)
     {
-        //
+        $libros = Libro::find($id);
+        return view('Libro.edit',compact('libros'));
     }
 
     /**
@@ -68,7 +73,8 @@ class LibroController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,['titulo'=>'required','autor'=>'required','paginas'=>'required','precio'=>'required']);
+        Libro::find($id)->
     }
 
     /**
