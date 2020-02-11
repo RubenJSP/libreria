@@ -16,7 +16,7 @@ class LibroController extends Controller
         $libros = Libros::orderBy('idLibro','DESC')->paginate(5);
         return view('Libro.index',compact('libros'));
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -74,7 +74,7 @@ class LibroController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,['titulo'=>'required','autor'=>'required','paginas'=>'required','precio'=>'required']);
-        Libro::find($id)->
+        Libro::find($id)->update();
     }
 
     /**
